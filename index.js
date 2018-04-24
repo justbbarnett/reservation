@@ -21,4 +21,5 @@ app.use("/tables", routes);
 app.use("/reservations", routes);
 app.post("/reservations", routes);
 app.get("/api/tables", routes);
+app.get("/api/waitlist", routes);
 
