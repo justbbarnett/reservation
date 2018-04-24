@@ -1,7 +1,5 @@
-import { POINT_CONVERSION_UNCOMPRESSED } from 'constants';
-
 var express = require('express')
-var path;
+var path = require('path');
 
 var routes = express.Router();
 
