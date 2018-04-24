@@ -4,6 +4,8 @@ var tablelist = require('../data/tablelist.js');
 var bodyParser = require("body-parser");
 var waitlist = require('../data/waitlist.js')
 
+console.log(tablelist)
+
 var routes = express.Router();
 
 routes.get('', (req, res) => res.sendFile(path.join(__dirname, '../public/index.html')));
@@ -11,20 +13,20 @@ routes.get('/tables', (req, res) => res.sendFile(path.join(__dirname, '../public
 routes.get('/reservations', (req, res) => res.sendFile(path.join(__dirname, '../public/reservation.html')));
 
 
-if (tablelist.length <= 5) {
-    routes.post('/api/tables', function (req, res) {
+routes.post( '/api/tables', function(req, res){
+    if( tablelist.length <= 4 ){
         let newReservation = req.body;
         tablelist.push(newReservation);
-        res.json(newReservation);   
-    })
-} else {
-        routes.post('/api/waitlist', function (req, res) {
+        res.json(true);   
+        console.log("length " + tablelist.length)
+    }
+    else{
         let newReservation = req.body;
         waitlist.push(newReservation);
-        res.json(newReservation);
-})
-}
-console.log(tablelist.length)
+        res.json(false);
+    }
+} )
+
 
 routes.get("/api/tables", (req, res) => {
     res.json(tablelist);
