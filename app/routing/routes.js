@@ -4,8 +4,6 @@ var tablelist = require('../data/tablelist.js');
 var bodyParser = require("body-parser");
 var waitlist = require('../data/waitlist.js')
 
-console.log(tablelist)
-
 var routes = express.Router();
 
 routes.get('', (req, res) => res.sendFile(path.join(__dirname, '../public/index.html')));
@@ -27,15 +25,27 @@ routes.post( '/api/tables', function(req, res){
     }
 } )
 
+routes.post('/api/clear', function (req, res) {
+    console.log('clear all tables');
+    tablelist = [];
+    waitlist = [];
+    res.sendFile(path.join(__dirname, 'app/public/table.html'));
+})
+
 
 routes.get("/api/tables", (req, res) => {
     res.json(tablelist);
-    console.log(tablelist);
+    
 })
 
 routes.get("/api/waitlist", (req, res) => {
     res.json(waitlist);
-    console.log(waitlist);
+    
+})
+
+routes.get("/api/clear", (req, res) => {
+    res.json(waitlist);
+    
 })
 
 module.exports = routes;

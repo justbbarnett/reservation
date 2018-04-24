@@ -7,7 +7,7 @@ var tables = require("./app/data/tablelist.js");
 var wait = require("./app/data/waitlist.js");
 
 var app = express();
-var PORT = 5555;
+var PORT = process.env.PORT || 5555;
 
 app.listen(PORT, function() {
     console.log("App is listening on PORT " + PORT);
